@@ -1,3 +1,29 @@
 import { Routes } from '@angular/router';
 
-export const routes: Routes = [];
+export const routes: Routes = [
+  {
+    path: 'Formulario',
+    children: [
+      {
+        path: 'distancia',
+        loadComponent: () =>
+          import('./Formulario/distancia/distancia').then((c) => c.Distancia)
+      },
+      {
+        path: 'zodiaco',
+        loadComponent: () =>
+          import('./Formulario/zodiaco/zodiaco').then((c) => c.ZodiacoComponent)
+      }
+    ]
+  },
+  
+  {
+    path: 'escuela/lista-escuela',
+    loadComponent: () =>
+      import('./escuela/lista-escuela/lista-escuela').then((c) => c.ListaEscuela)
+  },
+
+  
+  { path: '', redirectTo: 'admin', pathMatch: 'full' },
+  { path: '**', redirectTo: 'admin' }
+];

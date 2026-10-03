@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { initFlowbite } from 'flowbite';
-import { ZodiacoComponent } from './Formulario/zodiaco/zodiaco';
+import { RouterOutlet } from '@angular/router';
+import { Navbar } from './navbar/navbar';
+import { ListaEscuela } from './escuela/lista-escuela/lista-escuela';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [ZodiacoComponent],
+  imports: [RouterOutlet, Navbar, ListaEscuela],
   templateUrl: './app.html',
   styleUrls: ['./app.css']
 })
