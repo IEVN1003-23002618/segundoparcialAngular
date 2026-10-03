@@ -1,0 +1,112 @@
+.main-container {
+  display: flex;
+  gap: 40px;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  align-items: flex-start;
+}
+
+.form-box {
+  border: 2px solid #000;
+  padding: 15px 20px;
+  width: 280px;
+}
+
+.sub-header {
+  text-align: center;
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
+.field-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.field-row input {
+  width: 160px;
+}
+
+.fecha-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.fecha-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.fecha-col input {
+  width: 60px;
+}
+
+.sexo-section {
+  margin-bottom: 15px;
+}
+
+.radio-option {
+  margin-left: 15px;
+}
+
+.btn-imprimir {
+  width: 100%;
+  padding: 6px;
+  font-weight: bold;
+  border: 2px solid #000;
+  background-color: #e0e0e0;
+  cursor: pointer;
+}
+
+.result-box {
+  padding-top: 10px;
+}
+
+.txt-edad, .txt-signo-title {
+  font-size: 20px;
+}
+
+.signo-display {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 15px;
+  font-size: 22px;
+}
+
+.img-circle {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.img-circle img {
+  width: 60px !important;
+  height: 60px !important;
+  object-fit: contain;
+}
+
+/* Aumentamos el tamaño del contenedor circular */
+.img-circle {
+  width: 180px;  /* Antes era 90px */
+  height: 180px; /* Antes era 90px */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Aumentamos el tamaño de la imagen dentro del círculo */
+.img-circle img {
+  width: 140px !important;  /* Antes era 60px */
+  height: 140px !important; /* Antes era 60px */
+  object-fit: cover;        /* Cubre el círculo uniformemente */
+}

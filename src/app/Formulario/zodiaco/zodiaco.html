@@ -1,0 +1,65 @@
+<div class="main-container">
+  <!-- Formulario de entrada -->
+  <div class="form-box">
+    <h3>Datos Personales</h3>
+
+    <div class="field-row">
+      <label>Nombre</label>
+      <input type="text" [(ngModel)]="nombre" placeholder="Nombre" />
+    </div>
+
+    <div class="field-row">
+      <label>Apaterno</label>
+      <input type="text" [(ngModel)]="apaterno" placeholder="Apaterno" />
+    </div>
+
+    <div class="field-row">
+      <label>Amaterno</label>
+      <input type="text" [(ngModel)]="amaterno" placeholder="Amaterno" />
+    </div>
+
+    <h4 class="sub-header">Fecha de nacimiento</h4>
+    <div class="fecha-row">
+      <div class="fecha-col">
+        <label>Día</label>
+        <input type="number" [(ngModel)]="dia" placeholder="Día" />
+      </div>
+      <div class="fecha-col">
+        <label>Mes</label>
+        <input type="number" [(ngModel)]="mes" placeholder="Mes" />
+      </div>
+      <div class="fecha-col">
+        <label>Año</label>
+        <input type="number" [(ngModel)]="anio" placeholder="Año" />
+      </div>
+    </div>
+
+    <div class="sexo-section">
+      <label>sexo</label>
+      <div class="radio-option">
+        <input type="radio" id="masculino" name="sexo" value="Masculino" [(ngModel)]="sexo" />
+        <label for="masculino">Masculino</label>
+      </div>
+      <div class="radio-option">
+        <input type="radio" id="femenino" name="sexo" value="Femenino" [(ngModel)]="sexo" />
+        <label for="femenino">Femenino</label>
+      </div>
+    </div>
+
+    <button class="btn-imprimir" (click)="imprimir()">imprimir</button>
+  </div>
+
+  <!-- Vista de Resultados -->
+  <div class="result-box" *ngIf="mostrarResultado">
+    <h2>Hola <i><b>{{ resultadoNombre }}</b></i></h2>
+    <p class="txt-edad">Tienes <b>{{ edad }}</b> años</p>
+    <p class="txt-signo-title">tu signo zodiacal</p>
+    
+    <div class="signo-display">
+      <span>Es {{ signo }}</span>
+      <div class="img-circle">
+        <img [src]="imagenSigno" [alt]="signo" />
+      </div>
+    </div>
+  </div>
+</div>
