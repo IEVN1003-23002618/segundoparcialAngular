@@ -1,1 +1,136 @@
+<div class="max-w-3xl mx-auto my-6 p-6 bg-[#21409a] rounded-xl shadow-2xl text-white font-sans">
 
+  <div class="flex justify-center mb-6">
+    <div class="bg-white px-6 py-2 rounded shadow flex items-center justify-center">
+      <img src="cinepolis-logo.png" alt="Cinépolis" class="max-h-24 object-contain">
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+
+  
+    <div class="border-2 border-blue-300/80 rounded-lg p-4 relative bg-blue-950/20">
+      <span class="absolute -top-3.5 left-4 bg-[#21409a] px-2 text-lg font-bold text-white italic">
+        Entradas
+      </span>
+
+      <form [formGroup]="formulario" class="mt-2 space-y-3">
+        
+        <!-- Nombre -->
+        <div class="flex items-center justify-between gap-2">
+          <label for="nombre" class="text-sm font-medium w-1/2 text-gray-100">Nombre</label>
+          <input
+            type="text"
+            id="nombre"
+            formControlName="nombre"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/2 p-2"
+          >
+        </div>
+
+
+        <div class="flex items-center justify-between gap-2">
+          <label for="cantidadCompradores" class="text-sm font-medium w-1/2 text-gray-100">Cantidad Compradores</label>
+          <input
+            type="number"
+            id="cantidadCompradores"
+            formControlName="cantidadCompradores"
+            min="1"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/2 p-2"
+          >
+        </div>
+
+        <div class="flex items-center justify-between gap-2">
+          <label class="text-sm font-medium w-1/2 text-gray-100">Tarjeta Cineco</label>
+          <div class="flex items-center gap-4 w-1/2">
+            <label class="inline-flex items-center cursor-pointer text-sm">
+              <input type="radio" value="si" formControlName="tarjetaCineco" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500">
+              <span class="ms-1.5 font-medium">Sí</span>
+            </label>
+            <label class="inline-flex items-center cursor-pointer text-sm">
+              <input type="radio" value="no" formControlName="tarjetaCineco" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500">
+              <span class="ms-1.5 font-medium">No</span>
+            </label>
+          </div>
+        </div>
+
+  
+        <div class="flex items-center justify-between gap-2">
+          <label for="cantidadBoletos" class="text-sm font-medium w-1/2 text-gray-100">Cantidad De Boletos</label>
+          <input
+            type="number"
+            id="cantidadBoletos"
+            formControlName="cantidadBoletos"
+            min="1"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/2 p-2"
+          >
+        </div>
+
+      </form>
+    </div>
+
+  
+    <div class="border-2 border-blue-300/80 rounded-lg p-4 relative bg-blue-950/20 flex flex-col justify-start">
+      <span class="absolute -top-3.5 left-4 bg-[#21409a] px-2 text-lg font-bold text-white italic">
+        Salidas
+      </span>
+
+      <div class="mt-4 space-y-3">
+      
+        <div class="flex items-center justify-between gap-2">
+          <label class="text-sm font-medium w-1/2 text-gray-100">Nombre</label>
+          <div class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg p-2 w-1/2 min-h-[38px] font-semibold">
+            {{ datosBoleto.nombre }}
+          </div>
+        </div>
+
+
+        <div class="flex items-center justify-between gap-2">
+          <label class="text-sm font-medium w-1/2 text-gray-100">Valor a Pagar</label>
+          <div class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg p-2 w-1/2 min-h-[38px] font-bold text-right text-blue-900">
+            ${{ datosBoleto.valorPagar }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="flex justify-center my-6">
+    <img src="cinepolis-logo.png" alt="Cinépolis" class="max-h-24 object-contain">
+  </div>
+
+
+  <div class="max-w-xs mx-auto border-2 border-blue-300/80 rounded-lg p-4 relative text-center bg-blue-950/20">
+    <span class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#21409a] px-2 text-lg font-bold text-white italic">
+      Acciones
+    </span>
+
+    <div class="flex justify-center gap-4 mt-2">
+      <button
+        type="button"
+        (click)="procesar()"
+        class="bg-gray-200 hover:bg-white text-gray-900 font-bold py-1.5 px-5 rounded-lg border border-gray-400 shadow text-sm transition-colors"
+      >
+        Procesar
+      </button>
+
+      <button
+        type="button"
+        (click)="salir()"
+        class="bg-gray-200 hover:bg-white text-gray-900 font-bold py-1.5 px-5 rounded-lg border border-gray-400 shadow text-sm transition-colors"
+      >
+        Salir
+      </button>
+    </div>
+  </div>
+
+  @if (mensajeError) {
+    <div class="mt-6 p-3 bg-red-600/90 text-white text-center rounded-lg font-bold text-sm border border-red-400">
+      {{ mensajeError }}
+    </div>
+  }
+
+</div>
+<!-- llamar al componente ventas -->
+<app-ventas></app-ventas>

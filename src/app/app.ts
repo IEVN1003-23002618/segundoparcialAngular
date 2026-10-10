@@ -7,7 +7,7 @@ import { ListaEscuela } from './escuela/lista-escuela/lista-escuela';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, Navbar, ListaEscuela],
+  imports: [RouterOutlet, Navbar],
   templateUrl: './app.html',
   styleUrls: ['./app.css']
 })
