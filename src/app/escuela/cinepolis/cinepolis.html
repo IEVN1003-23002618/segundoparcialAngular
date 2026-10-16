@@ -8,7 +8,7 @@
 
   <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
 
-  
+    <!-- Entradas -->
     <div class="border-2 border-blue-300/80 rounded-lg p-4 relative bg-blue-950/20">
       <span class="absolute -top-3.5 left-4 bg-[#21409a] px-2 text-lg font-bold text-white italic">
         Entradas
@@ -27,7 +27,7 @@
           >
         </div>
 
-
+        <!-- Cantidad Compradores -->
         <div class="flex items-center justify-between gap-2">
           <label for="cantidadCompradores" class="text-sm font-medium w-1/2 text-gray-100">Cantidad Compradores</label>
           <input
@@ -39,6 +39,7 @@
           >
         </div>
 
+        <!-- Tarjeta Cineco -->
         <div class="flex items-center justify-between gap-2">
           <label class="text-sm font-medium w-1/2 text-gray-100">Tarjeta Cineco</label>
           <div class="flex items-center gap-4 w-1/2">
@@ -53,7 +54,7 @@
           </div>
         </div>
 
-  
+        <!-- Cantidad Boletos -->
         <div class="flex items-center justify-between gap-2">
           <label for="cantidadBoletos" class="text-sm font-medium w-1/2 text-gray-100">Cantidad De Boletos</label>
           <input
@@ -68,21 +69,19 @@
       </form>
     </div>
 
-  
+    <!-- Salidas -->
     <div class="border-2 border-blue-300/80 rounded-lg p-4 relative bg-blue-950/20 flex flex-col justify-start">
       <span class="absolute -top-3.5 left-4 bg-[#21409a] px-2 text-lg font-bold text-white italic">
         Salidas
       </span>
 
       <div class="mt-4 space-y-3">
-      
         <div class="flex items-center justify-between gap-2">
           <label class="text-sm font-medium w-1/2 text-gray-100">Nombre</label>
           <div class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg p-2 w-1/2 min-h-[38px] font-semibold">
             {{ datosBoleto.nombre }}
           </div>
         </div>
-
 
         <div class="flex items-center justify-between gap-2">
           <label class="text-sm font-medium w-1/2 text-gray-100">Valor a Pagar</label>
@@ -95,12 +94,11 @@
 
   </div>
 
-
   <div class="flex justify-center my-6">
     <img src="cinepolis-logo.png" alt="Cinépolis" class="max-h-24 object-contain">
   </div>
 
-
+  <!-- Acciones -->
   <div class="max-w-xs mx-auto border-2 border-blue-300/80 rounded-lg p-4 relative text-center bg-blue-950/20">
     <span class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#21409a] px-2 text-lg font-bold text-white italic">
       Acciones
@@ -132,5 +130,3 @@
   }
 
 </div>
-<!-- llamar al componente ventas -->
-<app-ventas></app-ventas>

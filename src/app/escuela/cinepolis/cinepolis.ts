@@ -1,6 +1,7 @@
-import { Component, ViewChild} from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {Ventas} from '../ventas/ventas';
+import { CommonModule } from '@angular/common';
+import { Ventas } from '../ventas/ventas';
 
 export interface IBoleto {
   nombre: string;
@@ -13,18 +14,18 @@ export interface IVenta {
   boletos: number;
   tarjetaCineco: string;
   valorPagar: number;
+}
 
 @Component({
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, Ventas],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule], // Ventas remivido de este arreglo
   selector: 'app-cinepolis',
   styleUrl: './cinepolis.css',
   templateUrl: './cinepolis.html',
 })
-export class Cinepolis {
+export class Cinepolis implements OnInit {
   @ViewChild(Ventas) ComponenteVentas!: Ventas;
   formulario!: FormGroup;
-
 
   datosBoleto: IBoleto = {
     nombre: '',
@@ -78,25 +79,24 @@ export class Cinepolis {
     }
 
     this.datosBoleto.nombre = nombre;
-    this.datosBoleto.valorPagar = total;
+    this.datosBoleto.valorPagar = Number(total.toFixed(2));
 
     const nuevaVenta: IVenta = {
       nombre: nombre,
       compradores: compradores,
-      boletas: boletos,
+      boletos: boletos,
       tarjetaCineco: tarjeta,
-      valorPagar: total
+      valorPagar: Number(total.toFixed(2))
     };
 
     const ventasExistentes = JSON.parse(localStorage.getItem('ventas') || '[]');
     ventasExistentes.push(nuevaVenta);
     localStorage.setItem('ventas', JSON.stringify(ventasExistentes));
 
-    // Refrescar la tabla
-    if (this.componenteVentas) {
-      this.componenteVentas.cargarVentas();
+    // Refrescar la tabla si el componente está activo
+    if (this.ComponenteVentas) {
+      this.ComponenteVentas.cargarVentas();
     }
-  
   }
 
   salir(): void {

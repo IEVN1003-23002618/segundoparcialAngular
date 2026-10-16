@@ -29,6 +29,12 @@ export const routes: Routes = [
       import('./escuela/cinepolis/cinepolis').then((c) => c.Cinepolis)
   },
 
+  {
+    path: 'escuela/ventas',
+    loadComponent: () =>
+      import('./escuela/ventas/ventas').then((c) => c.Ventas)
+  },
+
   
   { path: '', redirectTo: 'admin', pathMatch: 'full' },
   { path: '**', redirectTo: 'admin' }

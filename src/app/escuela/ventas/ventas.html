@@ -1,1 +1,167 @@
-<p>ventas works!</p>
+<div class="max-w-5xl mx-auto my-8 p-6 bg-white rounded-xl shadow-md border border-gray-100">
+
+  <!-- Encabezado con Botones -->
+  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+    <h1 class="text-2xl font-bold text-gray-900">
+      Historial de Ventas - Cinépolis
+    </h1>
+
+    <div class="flex items-center gap-3">
+      <button
+        type="button"
+        (click)="cargarVentas()"
+        class="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2 transition-colors"
+      >
+        Cargar
+      </button>
+
+      <button
+        type="button"
+        (click)="limpiarTodo()"
+        class="text-white bg-slate-700 hover:bg-slate-800 focus:ring-4 focus:ring-slate-300 font-medium rounded-full text-sm px-5 py-2 transition-colors"
+      >
+        Limpiar Todo
+      </button>
+    </div>
+  </div>
+
+  <!-- Tabla -->
+  <div class="relative overflow-x-auto rounded-lg">
+    <table class="w-full text-sm text-left text-gray-700">
+      <thead class="text-xs text-gray-700 uppercase bg-gray-100">
+        <tr>
+          <th scope="col" class="px-6 py-3">#</th>
+          <th scope="col" class="px-6 py-3">Nombre</th>
+          <th scope="col" class="px-6 py-3">Compradores</th>
+          <th scope="col" class="px-6 py-3">Boletos</th>
+          <th scope="col" class="px-6 py-3">Tarjeta Cineco</th>
+          <th scope="col" class="px-6 py-3">Total</th>
+          <th scope="col" class="px-6 py-3 text-center">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let venta of ventas; let i = index" class="bg-white border-b hover:bg-gray-50">
+          <td class="px-6 py-4 font-bold text-gray-900">{{ i + 1 }}</td>
+          <td class="px-6 py-4 font-semibold text-gray-900">{{ venta.nombre }}</td>
+          <td class="px-6 py-4">{{ venta.compradores }}</td>
+          <td class="px-6 py-4">{{ venta.boletos }}</td>
+          <td class="px-6 py-4 uppercase font-bold">
+            <span [class]="venta.tarjetaCineco === 'si' ? 'text-green-600' : 'text-gray-500'">
+              {{ venta.tarjetaCineco === 'si' ? 'SI' : 'NO' }}
+            </span>
+          </td>
+          <td class="px-6 py-4 font-bold text-blue-900">
+            ${{ venta.valorPagar }}
+          </td>
+          <td class="px-6 py-4 text-center">
+            <div class="flex justify-center gap-2">
+              <button
+                type="button"
+                (click)="abrirModalEditar(i)"
+                class="text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:ring-green-300 font-medium rounded-full text-xs px-4 py-1.5 transition-colors"
+              >
+                Editar
+              </button>
+
+              <button
+                type="button"
+                (click)="eliminarVenta(i)"
+                class="text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-red-300 font-medium rounded-full text-xs px-4 py-1.5 transition-colors"
+              >
+                Eliminar
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="ventas.length === 0" class="p-4 mt-4 text-sm text-center text-gray-600 bg-gray-50 rounded-lg">
+    No hay ventas registradas en el historial.
+  </div>
+
+</div>
+
+<!-- MODAL FLOTANTE PARA EDITAR -->
+<div *ngIf="mostrarModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
+  <div class="bg-white rounded-xl shadow-2xl w-full max-w-md p-6 relative">
+    
+    <h2 class="text-xl font-bold text-gray-900 mb-4 border-b pb-2">
+      Editar Venta #{{ indiceEdicion + 1 }}
+    </h2>
+
+    <form [formGroup]="formularioEditar" (ngSubmit)="guardarEdicion()" class="space-y-4">
+      
+      <!-- Nombre -->
+      <div>
+        <label class="block mb-1 text-sm font-medium text-gray-700">Nombre del Comprador</label>
+        <input
+          type="text"
+          formControlName="nombre"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+        >
+      </div>
+
+      <!-- Compradores -->
+      <div>
+        <label class="block mb-1 text-sm font-medium text-gray-700">Cantidad Compradores</label>
+        <input
+          type="number"
+          min="1"
+          formControlName="compradores"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+        >
+      </div>
+
+      <!-- Boletos -->
+      <div>
+        <label class="block mb-1 text-sm font-medium text-gray-700">Cantidad Boletos</label>
+        <input
+          type="number"
+          min="1"
+          formControlName="boletos"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+        >
+      </div>
+
+      <!-- Tarjeta Cineco -->
+      <div>
+        <label class="block mb-1 text-sm font-medium text-gray-700">Tarjeta Cineco</label>
+        <div class="flex gap-4 items-center">
+          <label class="inline-flex items-center cursor-pointer text-sm">
+            <input type="radio" value="si" formControlName="tarjetaCineco" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500">
+            <span class="ms-1.5 font-medium">Sí</span>
+          </label>
+          <label class="inline-flex items-center cursor-pointer text-sm">
+            <input type="radio" value="no" formControlName="tarjetaCineco" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500">
+            <span class="ms-1.5 font-medium">No</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Mensaje de error interno del modal -->
+      <div *ngIf="mensajeErrorModal" class="p-2.5 text-xs text-red-800 bg-red-100 rounded-lg font-medium">
+        {{ mensajeErrorModal }}
+      </div>
+
+      <!-- Botones del Modal -->
+      <div class="flex justify-end gap-3 pt-3 border-t">
+        <button
+          type="button"
+          (click)="cerrarModal()"
+          class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-200 hover:bg-gray-300 rounded-lg transition-colors"
+        >
+          Cancelar
+        </button>
+        <button
+          type="submit"
+          class="px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors"
+        >
+          Guardar Cambios
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>
