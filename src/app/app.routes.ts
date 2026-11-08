@@ -59,21 +59,25 @@ export const routes: Routes = [
           import('./utl/ABCAlumnos/eliminar/eliminar').then((c) => c.Eliminar)
       },
       {
-      path: 'maestros',
-      loadComponent: () => import('./utl/ABCMaestros/maestros/maestros').then((c) => c.Maestros)
-    },
-    {
-      path: 'agregar-maestro',
-      loadComponent: () => import('./utl/ABCMaestros/agregar/agregar').then((c) => c.Agregar)
-    },
-    {
-      path: 'editar-maestro/:id',
-      loadComponent: () => import('./utl/ABCMaestros/editar/editar').then((c) => c.Editar)
-    },
-    {
-      path: 'eliminar-maestro/:id',
-      loadComponent: () => import('./utl/ABCMaestros/eliminar/eliminar').then((c) => c.Eliminar)
-    }
+        path: 'maestros',
+        loadComponent: () =>
+          import('./utl/ABCMaestros/maestros/maestros').then((c) => c.Maestros)
+      },
+      {
+        path: 'agregar-maestro',
+        loadComponent: () =>
+          import('./utl/ABCMaestros/agregar/agregar').then((c) => c.Agregar)
+      },
+      {
+        path: 'editar-maestro/:id',
+        loadComponent: () =>
+          import('./utl/ABCMaestros/editar/editar').then((c) => c.Editar)
+      },
+      {
+        path: 'eliminar-maestro/:id',
+        loadComponent: () =>
+          import('./utl/ABCMaestros/eliminar/eliminar').then((c) => c.Eliminar)
+      }
     ]
   }, 
 

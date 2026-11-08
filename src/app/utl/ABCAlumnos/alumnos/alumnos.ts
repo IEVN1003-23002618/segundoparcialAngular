@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
@@ -14,21 +14,13 @@ import { AlumnoFilterPipe } from '../alumnos-filter.pipe';
 })
 export class Alumnos implements OnInit {
   listFilter: string = '';
-  alumnoTitle!: string;
   dataSource: AlumnosUTL[] = [];
 
-
-  alumnosIric: AlumnosUTL[] = [
-    {
-      matricula: 1234,
-      nombre: 'pedro',
-      apaterno: 'lopez',
-      amaterno: 'muñoz',
-      correo: 'pedro@gmail.com',
-    }
-  ];
-
-  constructor(public alumnosUTL: AlumnosapiService, private router: Router) {}
+  constructor(
+    public alumnosUTL: AlumnosapiService,
+    private router: Router,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
     this.cargarAlumnos();
@@ -37,16 +29,11 @@ export class Alumnos implements OnInit {
   cargarAlumnos(): void {
     this.alumnosUTL.getAlumnos().subscribe({
       next: (response: AlumnosUTL[]) => {
-        console.log('Datos recibidos del API:', response);
         this.dataSource = response;
+        this.cdr.detectChanges();
       },
       error: (error) => {
-        console.error('Error al consultar la API. Cargando datos de respaldo:', error);
-        
-        this.dataSource = this.alumnosIric;
-      },
-      complete: () => {
-        console.log('Carga de alumnos finalizada');
+        console.error('Error al cargar alumnos:', error);
       }
     });
   }

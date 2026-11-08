@@ -1,7 +1,7 @@
 export interface AlumnosUTL {
-    matricula:number;
-    nombre:string;
-    apaterno:string;
-    amaterno:string;
-    correo:string;
+  matricula: number | string;
+  nombre: string;
+  apaterno: string;
+  amaterno: string;
+  correo: string;
 }
